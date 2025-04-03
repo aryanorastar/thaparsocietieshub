@@ -4,38 +4,44 @@ import toast from 'react-hot-toast';
 import { supabase } from '../lib/supabase';
 
 export function ContactForm() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const { error } = await supabase
-        .from('contact_messages')
-        .insert([formData]);
 
-      if (error) throw error;
+    const { name, email, message } = formData;
 
-      toast.success('Message sent successfully!');
-      setFormData({ name: '', email: '', message: '' });
-    } catch (error: any) {
-      toast.error('Failed to send message. Please try again.');
+    if (!name || !email || !message) {
+      toast.error('Please fill in all fields.');
+      return;
     }
+
+    // Send data to Supabase
+    const { error } = await supabase.from('contacts').insert([{ name, email, message }]);
+
+    if (error) {
+      toast.error('Error sending message.');
+      console.error(error);
+      return;
+    }
+
+    toast.success('Message sent successfully!');
+
+    // Redirect to Gmail
+    window.location.href = `mailto:your-email@gmail.com?subject=Contact Form&body=${encodeURIComponent(
+      `Name: ${name}%0AEmail: ${email}%0A%0A${message}`
+    )}`;
+
+    // Reset form
+    setFormData({ name: '', email: '', message: '' });
   };
 
   return (
     <div className="glass-effect rounded-xl overflow-hidden p-6 md:p-8">
-      <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-        Contact Us
-      </h2>
+      <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Contact Us</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            Name
-          </label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
           <input
             type="text"
             value={formData.name}
@@ -45,9 +51,7 @@ export function ContactForm() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            Email
-          </label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
           <input
             type="email"
             value={formData.email}
@@ -57,9 +61,7 @@ export function ContactForm() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            Message
-          </label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Message</label>
           <textarea
             value={formData.message}
             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
