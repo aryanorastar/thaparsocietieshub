@@ -12,6 +12,11 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
   const [imageError, setImageError] = useState(false);
 
+  const handleEmailClick = (e: React.MouseEvent, email: string) => {
+    e.stopPropagation();
+    window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${email}`, '_blank');
+  };
+
   const getRegistrationButton = () => {
     switch (society.registrationStatus) {
       case 'open':
@@ -20,7 +25,7 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
             href={society.registrationLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center px-4 py-2 w-full justify-center bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg hover:from-emerald-700 hover:to-teal-700 transition-all duration-300 transform hover:scale-[1.02] relative overflow-hidden button-effect"
+            className="group inline-flex items-center px-4 py-2 w-full justify-center bg-brand-red text-white rounded-lg hover:bg-brand-red/90 transition-all duration-300 transform hover:scale-[1.02]"
           >
             <span className="relative z-10 flex items-center">
               <CheckCircle2 size={16} className="mr-2" />
@@ -33,7 +38,7 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
         return (
           <button
             disabled
-            className="group inline-flex items-center px-4 py-2 w-full justify-center bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-lg cursor-not-allowed relative overflow-hidden opacity-90"
+            className="group inline-flex items-center px-4 py-2 w-full justify-center bg-brand-gold text-white rounded-lg cursor-not-allowed relative overflow-hidden opacity-90"
           >
             <span className="relative z-10 flex items-center">
               <Clock size={16} className="mr-2 animate-pulse" />
@@ -45,7 +50,7 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
         return (
           <button
             disabled
-            className="group inline-flex items-center px-4 py-2 w-full justify-center bg-gradient-to-r from-gray-600 to-gray-700 text-white rounded-lg cursor-not-allowed relative overflow-hidden opacity-80"
+            className="group inline-flex items-center px-4 py-2 w-full justify-center bg-gray-600 text-white rounded-lg cursor-not-allowed relative overflow-hidden opacity-80"
           >
             <span className="relative z-10 flex items-center">
               <Lock size={16} className="mr-2" />
@@ -60,10 +65,11 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
     <div 
       className={`hover-card-effect cursor-pointer perspective-1000 transition-transform duration-700 ${isFlipped ? 'rotate-y-180' : ''}`}
       onClick={() => setIsFlipped(!isFlipped)}
+      style={{ transitionDelay: '150ms' }}
     >
       <div className="relative w-full h-full">
         {/* Front of card */}
-        <div className={`rounded-xl overflow-hidden gradient-border p-6 ${isFlipped ? 'hidden' : 'block'} ${
+        <div className={`rounded-xl overflow-hidden p-6 ${isFlipped ? 'hidden' : 'block'} ${
           theme === 'dark'
             ? 'glass-effect'
             : 'bg-white shadow-lg'
@@ -82,10 +88,10 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
               )}
             </div>
             <div className="flex-1">
-              <h3 className={`text-xl font-bold ${theme === 'dark' ? 'text-gradient' : 'text-light-text'}`}>
+              <h3 className={`text-xl font-bold ${theme === 'dark' ? 'text-white' : 'text-light-text'}`}>
                 {society.name}
               </h3>
-              <span className="px-3 py-1 text-sm rounded-full bg-gradient-to-r from-indigo-500/10 to-purple-500/10 text-indigo-600 font-medium border border-indigo-200/20">
+              <span className="px-3 py-1 text-sm rounded-full bg-brand-red/10 text-brand-red font-medium">
                 {society.category}
               </span>
             </div>
@@ -122,7 +128,12 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
               theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
             }`}>
               <Mail className="h-4 w-4 mr-2 text-brand-red" />
-              <a href={`mailto:${society.email}`} className="hover:text-brand-red transition-colors duration-300">{society.email}</a>
+              <button 
+                onClick={(e) => handleEmailClick(e, society.email!)}
+                className="hover:text-brand-red transition-colors duration-300 text-left"
+              >
+                {society.email}
+              </button>
             </div>
           )}
 
@@ -190,7 +201,7 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
         </div>
 
         {/* Back of card */}
-        <div className={`rounded-xl overflow-hidden gradient-border p-6 absolute top-0 w-full h-full ${isFlipped ? 'block rotate-y-180' : 'hidden'} ${
+        <div className={`rounded-xl overflow-hidden p-6 absolute top-0 w-full h-full ${isFlipped ? 'block rotate-y-180' : 'hidden'} ${
           theme === 'dark'
             ? 'glass-effect-dark'
             : 'bg-light-card'
@@ -224,7 +235,12 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
                   theme === 'dark' ? 'text-gray-200' : 'text-gray-600'
                 }`}>
                   <Mail className="h-4 w-4 mr-2 text-brand-red" />
-                  <a href={`mailto:${society.email}`} className="hover:text-brand-red">{society.email}</a>
+                  <button 
+                    onClick={(e) => handleEmailClick(e, society.email!)}
+                    className="hover:text-brand-red text-left"
+                  >
+                    {society.email}
+                  </button>
                 </div>
               )}
               {society.phone_number && (
