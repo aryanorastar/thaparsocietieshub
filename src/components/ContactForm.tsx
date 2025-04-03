@@ -5,7 +5,6 @@ import { supabase } from '../lib/supabase';
 
 export function ContactForm() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [mailLink, setMailLink] = useState(null); // Store mailto link
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,12 +27,13 @@ export function ContactForm() {
 
     toast.success('Message sent successfully!');
 
-    // Generate Gmail "mailto" link
-    const mailtoLink = `mailto:your-email@gmail.com?subject=New Contact Form Submission&body=${encodeURIComponent(
+    // Construct Gmail URL
+    const gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=your-email@gmail.com&su=New Contact Form Submission&body=${encodeURIComponent(
       `Name: ${name}\nEmail: ${email}\n\n${message}`
     )}`;
 
-    setMailLink(mailtoLink); // Store link for manual click
+    // Open Gmail in a new tab
+    window.open(gmailURL, '_blank');
 
     // Reset form
     setFormData({ name: '', email: '', message: '' });
@@ -81,17 +81,6 @@ export function ContactForm() {
           <Send size={16} />
         </button>
       </form>
-
-      {/* Gmail Redirect Button */}
-      {mailLink && (
-        <a
-          href={mailLink}
-          className="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-all duration-300 flex items-center justify-center space-x-2"
-        >
-          <Mail size={16} />
-          <span>Open in Gmail</span>
-        </a>
-      )}
     </div>
   );
 }
