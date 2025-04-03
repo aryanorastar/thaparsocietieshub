@@ -63,7 +63,7 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
       style={{ perspective: "1000px", height: "450px" }}
     >
       <div 
-        className="flip-card-inner w-full h-full relative transition-transform duration-700 transform-style-preserve-3d"
+        className="flip-card-inner w-full h-full relative transition-transform duration-700"
         style={{ 
           transformStyle: "preserve-3d", 
           transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)" 
@@ -71,16 +71,16 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
       >
         {/* Front of card */}
         <div 
-          className={`flip-card-front w-full h-full absolute ${
+          className={`flip-card-front absolute w-full h-full ${
             theme === 'dark' ? 'bg-gray-800' : 'bg-white'
-          } rounded-xl overflow-hidden border ${
+          } rounded-xl overflow-auto border ${
             theme === 'dark' ? 'border-gray-700' : 'border-gray-200'
           } p-6 shadow-md`}
           style={{ backfaceVisibility: "hidden" }}
           onClick={() => setIsFlipped(true)}
         >
           <div className="flex items-center space-x-4 mb-4">
-            <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
+            <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center flex-shrink-0">
               {society.logo_url && !imageError ? (
                 <img
                   src={society.logo_url}
@@ -104,7 +104,7 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
             </div>
           </div>
           
-          <p className={`mb-6 line-clamp-3 transition-all duration-300 ${
+          <p className={`mb-6 line-clamp-3 ${
             theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
           } font-normal leading-relaxed`}>
             {society.description}
@@ -115,7 +115,7 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
               theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
             }`}>
               <UserCircle className="h-4 w-4 mr-2 text-indigo-600 flex-shrink-0" />
-              <span className="transition-colors duration-300 font-medium">
+              <span className="font-medium">
                 Faculty Head: <span className="font-normal">{society.faculty_head}</span>
               </span>
             </div>
@@ -126,7 +126,7 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
               theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
             }`}>
               <MapPin className="h-4 w-4 mr-2 text-indigo-600 flex-shrink-0" />
-              <span className="transition-colors duration-300 font-normal">{society.room}</span>
+              <span className="font-normal">{society.room}</span>
             </div>
           )}
 
@@ -137,7 +137,7 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
               <Mail className="h-4 w-4 mr-2 text-indigo-600 flex-shrink-0" />
               <a 
                 href={`mailto:${society.email}`} 
-                className="hover:text-indigo-600 transition-colors duration-300 font-normal"
+                className="hover:text-indigo-600 font-normal"
                 onClick={(e) => e.stopPropagation()}
               >
                 {society.email}
@@ -152,7 +152,7 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
               <Phone className="h-4 w-4 mr-2 text-indigo-600 flex-shrink-0" />
               <a 
                 href={`tel:${society.phone_number}`} 
-                className="hover:text-indigo-600 transition-colors duration-300 font-normal"
+                className="hover:text-indigo-600 font-normal"
                 onClick={(e) => e.stopPropagation()}
               >
                 {society.phone_number}
@@ -217,9 +217,9 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
 
         {/* Back of card */}
         <div 
-          className={`flip-card-back w-full h-full absolute ${
+          className={`flip-card-back absolute w-full h-full ${
             theme === 'dark' ? 'bg-gray-800' : 'bg-white'
-          } rounded-xl overflow-hidden border ${
+          } rounded-xl overflow-auto border ${
             theme === 'dark' ? 'border-gray-700' : 'border-gray-200'
           } p-6 shadow-md`}
           style={{ 
@@ -232,14 +232,16 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
             theme === 'dark' ? 'text-white' : 'text-gray-800'
           }`}>About {society.name}</h3>
           
-          <p className={`mb-4 ${
-            theme === 'dark' ? 'text-gray-200' : 'text-gray-600'
-          } font-normal leading-relaxed`}>{society.description}</p>
+          <div className={`mb-4 ${
+            theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+          } font-normal leading-relaxed max-h-64 overflow-y-auto`}>
+            {society.description}
+          </div>
           
           <div className="space-y-3 mb-6">
             {society.faculty_head && (
               <div className={`flex items-center ${
-                theme === 'dark' ? 'text-gray-200' : 'text-gray-600'
+                theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
               }`}>
                 <UserCircle className="h-4 w-4 mr-2 text-indigo-600 flex-shrink-0" />
                 <span className="font-medium">Faculty Head: <span className="font-normal">{society.faculty_head}</span></span>
@@ -247,7 +249,7 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
             )}
             {society.room && (
               <div className={`flex items-center ${
-                theme === 'dark' ? 'text-gray-200' : 'text-gray-600'
+                theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
               }`}>
                 <MapPin className="h-4 w-4 mr-2 text-indigo-600 flex-shrink-0" />
                 <span className="font-medium">Location: <span className="font-normal">{society.room}</span></span>
@@ -255,7 +257,7 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
             )}
             {society.email && (
               <div className={`flex items-center ${
-                theme === 'dark' ? 'text-gray-200' : 'text-gray-600'
+                theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
               }`}>
                 <Mail className="h-4 w-4 mr-2 text-indigo-600 flex-shrink-0" />
                 <span className="font-medium">Email: </span>
@@ -270,7 +272,7 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
             )}
             {society.phone_number && (
               <div className={`flex items-center ${
-                theme === 'dark' ? 'text-gray-200' : 'text-gray-600'
+                theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
               }`}>
                 <Phone className="h-4 w-4 mr-2 text-indigo-600 flex-shrink-0" />
                 <span className="font-medium">Phone: </span>
@@ -284,7 +286,7 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
               </div>
             )}
             <div className={`flex items-center ${
-              theme === 'dark' ? 'text-gray-200' : 'text-gray-600'
+              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
             }`}>
               <Clock className="h-4 w-4 mr-2 text-indigo-600 flex-shrink-0" />
               <span className="font-medium">Status: <span className="font-normal capitalize">{society.registrationStatus}</span></span>
