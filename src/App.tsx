@@ -104,6 +104,9 @@ function App() {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  // Extract unique categories for filter options
+  const categories = ['all', ...new Set(societies.map(society => society.category))];
+
   return (
     <Router>
       <div className={`min-h-screen relative overflow-hidden ${theme === 'dark' ? 'bg-brand-black' : 'bg-light-background'}`}>
@@ -265,7 +268,7 @@ function App() {
             <Route path="/societies" element={
               <>
                 {/* Search and Filter Section */}
-                <div className="mb-12 space-y-4">
+                <div className="mb-12 space-y-6">
                   <div className="relative group">
                     <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-red to-brand-teal rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
                     <div className="relative">
@@ -284,22 +287,65 @@ function App() {
                     </div>
                   </div>
 
-                  <div className="flex items-center space-x-2">
-                    <Filter className="h-5 w-5 text-brand-gold" />
-                    <select
-                      value={registrationFilter}
-                      onChange={(e) => setRegistrationFilter(e.target.value)}
-                      className={`backdrop-blur-sm border-0 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-red ${
-                        theme === 'dark'
-                          ? 'bg-brand-black/90 text-white'
-                          : 'bg-light-card text-light-text'
-                      }`}
-                    >
-                      <option value="all">All Registrations</option>
-                      <option value="open">Open</option>
-                      <option value="coming-soon">Coming Soon</option>
-                      <option value="closed">Closed</option>
-                    </select>
+                  {/* Multi-filter section */}
+                  <div className={`p-4 rounded-lg ${
+                    theme === 'dark'
+                      ? 'glass-effect-dark border border-brand-grey/30'
+                      : 'bg-light-card/80 border border-light-border'
+                    }`}>
+                    <h3 className={`text-lg font-medium mb-3 flex items-center ${theme === 'dark' ? 'text-white' : 'text-light-text'}`}>
+                      <Filter className="h-5 w-5 mr-2 text-brand-gold" />
+                      Filters
+                    </h3>
+                    
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {/* Registration Status Filter */}
+                      <div>
+                        <label className={`block mb-2 text-sm font-medium ${theme === 'dark' ? 'text-white/80' : 'text-light-text/80'}`}>
+                          Registration Status
+                        </label>
+                        <select
+                          value={registrationFilter}
+                          onChange={(e) => setRegistrationFilter(e.target.value)}
+                          className={`backdrop-blur-sm border-0 rounded-lg px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-brand-red ${
+                            theme === 'dark'
+                              ? 'bg-brand-black/90 text-white'
+                              : 'bg-light-card text-light-text'
+                          }`}
+                        >
+                          <option value="all">All Registrations</option>
+                          <option value="open">Open</option>
+                          <option value="coming-soon">Coming Soon</option>
+                          <option value="closed">Closed</option>
+                        </select>
+                      </div>
+
+                      {/* Society Category Filter */}
+                      <div>
+                        <label className={`block mb-2 text-sm font-medium ${theme === 'dark' ? 'text-white/80' : 'text-light-text/80'}`}>
+                          Society Type
+                        </label>
+                        <select
+                          value={selectedCategory}
+                          onChange={(e) => setSelectedCategory(e.target.value)}
+                          className={`backdrop-blur-sm border-0 rounded-lg px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-brand-red ${
+                            theme === 'dark'
+                              ? 'bg-brand-black/90 text-white'
+                              : 'bg-light-card text-light-text'
+                          }`}
+                        >
+                          <option value="all">All Categories</option>
+                          {categories
+                            .filter(category => category !== 'all')
+                            .sort()
+                            .map((category) => (
+                              <option key={category} value={category}>
+                                {category.charAt(0).toUpperCase() + category.slice(1)}
+                              </option>
+                            ))}
+                        </select>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -349,6 +395,16 @@ function App() {
                       : 'bg-light-card'
                   }`}>
                     <p className="text-brand-gold text-lg">No societies found matching your search criteria.</p>
+                    <button 
+                      onClick={() => {
+                        setSearchTerm('');
+                        setSelectedCategory('all');
+                        setRegistrationFilter('all');
+                      }}
+                      className="mt-4 px-4 py-2 bg-brand-red text-white rounded-lg hover:bg-brand-red/80 transition"
+                    >
+                      Reset Filters
+                    </button>
                   </div>
                 )}
               </>
