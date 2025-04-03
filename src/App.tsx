@@ -301,57 +301,51 @@ function App() {
                       </h3>
                       
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {/* Registration Status Filter */}
-                        <div className="relative group">
-                          <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-red to-brand-gold rounded-lg blur opacity-30 group-hover:opacity-70 transition duration-300"></div>
-                          <div className="relative">
-                            <label className={`block mb-2 text-sm font-medium ${theme === 'dark' ? 'text-white/80' : 'text-light-text/80'}`}>
-                              Registration Status
-                            </label>
-                            <select
-                              value={registrationFilter}
-                              onChange={(e) => setRegistrationFilter(e.target.value)}
-                              className={`backdrop-blur-sm border-0 rounded-lg px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-brand-red ${
-                                theme === 'dark'
-                                  ? 'bg-brand-black/90 text-white'
-                                  : 'bg-light-card text-light-text'
-                              }`}
-                            >
-                              <option value="all">All Registrations</option>
-                              <option value="open">Open</option>
-                              <option value="coming-soon">Coming Soon</option>
-                              <option value="closed">Closed</option>
-                            </select>
-                          </div>
+                        {/* Registration Status Filter - BORDER REMOVED */}
+                        <div className="relative">
+                          <label className={`block mb-2 text-sm font-medium ${theme === 'dark' ? 'text-white/80' : 'text-light-text/80'}`}>
+                            Registration Status
+                          </label>
+                          <select
+                            value={registrationFilter}
+                            onChange={(e) => setRegistrationFilter(e.target.value)}
+                            className={`backdrop-blur-sm border-0 rounded-lg px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-brand-red ${
+                              theme === 'dark'
+                                ? 'bg-brand-black/90 text-white'
+                                : 'bg-light-card text-light-text'
+                            }`}
+                          >
+                            <option value="all">All Registrations</option>
+                            <option value="open">Open</option>
+                            <option value="coming-soon">Coming Soon</option>
+                            <option value="closed">Closed</option>
+                          </select>
                         </div>
 
-                        {/* Society Category Filter */}
-                        <div className="relative group">
-                          <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-gold to-brand-teal rounded-lg blur opacity-30 group-hover:opacity-70 transition duration-300"></div>
-                          <div className="relative">
-                            <label className={`block mb-2 text-sm font-medium ${theme === 'dark' ? 'text-white/80' : 'text-light-text/80'}`}>
-                              Society Type
-                            </label>
-                            <select
-                              value={selectedCategory}
-                              onChange={(e) => setSelectedCategory(e.target.value)}
-                              className={`backdrop-blur-sm border-0 rounded-lg px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-brand-red ${
-                                theme === 'dark'
-                                  ? 'bg-brand-black/90 text-white'
-                                  : 'bg-light-card text-light-text'
-                              }`}
-                            >
-                              <option value="all">All Categories</option>
-                              {categories
-                                .filter(category => category !== 'all')
-                                .sort()
-                                .map((category) => (
-                                  <option key={category} value={category}>
-                                    {category.charAt(0).toUpperCase() + category.slice(1)}
-                                  </option>
-                                ))}
-                            </select>
-                          </div>
+                        {/* Society Category Filter - BORDER REMOVED */}
+                        <div className="relative">
+                          <label className={`block mb-2 text-sm font-medium ${theme === 'dark' ? 'text-white/80' : 'text-light-text/80'}`}>
+                            Society Type
+                          </label>
+                          <select
+                            value={selectedCategory}
+                            onChange={(e) => setSelectedCategory(e.target.value)}
+                            className={`backdrop-blur-sm border-0 rounded-lg px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-brand-red ${
+                              theme === 'dark'
+                                ? 'bg-brand-black/90 text-white'
+                                : 'bg-light-card text-light-text'
+                            }`}
+                          >
+                            <option value="all">All Categories</option>
+                            {categories
+                              .filter(category => category !== 'all')
+                              .sort()
+                              .map((category) => (
+                                <option key={category} value={category}>
+                                  {category.charAt(0).toUpperCase() + category.slice(1)}
+                                </option>
+                              ))}
+                          </select>
                         </div>
                       </div>
                     </div>
