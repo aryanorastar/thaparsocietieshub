@@ -56,18 +56,16 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
     }
   };
 
+  const cardBackgroundClass = theme === 'dark' ? 'glass-effect' : 'bg-white shadow-lg';
+
   return (
     <div 
-      className={`hover-card-effect cursor-pointer perspective-1000 transition-transform duration-700 ${isFlipped ? 'rotate-y-180' : ''}`}
-      onClick={() => setIsFlipped(!isFlipped)}
+      className="hover-card-effect cursor-pointer perspective-1000 transition-transform duration-700"
+      onMouseEnter={() => setIsFlipped(true)}
+      onMouseLeave={() => setIsFlipped(false)}
     >
       <div className="relative w-full h-full">
-        {/* Front of card */}
-        <div className={`rounded-xl overflow-hidden gradient-border p-6 ${isFlipped ? 'hidden' : 'block'} ${
-          theme === 'dark'
-            ? 'glass-effect'
-            : 'bg-white shadow-lg'
-        }`}>
+        <div className={`rounded-xl overflow-hidden gradient-border p-6 ${isFlipped ? 'hidden' : 'block'} ${cardBackgroundClass}`}>
           <div className="flex items-center space-x-4 mb-4">
             <div className="w-16 h-16 rounded-full overflow-hidden bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center">
               {society.logo_url && !imageError ? (
@@ -189,12 +187,7 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
           </div>
         </div>
 
-        {/* Back of card */}
-        <div className={`rounded-xl overflow-hidden gradient-border p-6 absolute top-0 w-full h-full ${isFlipped ? 'block rotate-y-180' : 'hidden'} ${
-          theme === 'dark'
-            ? 'glass-effect-dark'
-            : 'bg-light-card'
-        }`}>
+        <div className={`rounded-xl overflow-hidden gradient-border p-6 absolute top-0 w-full h-full ${isFlipped ? 'block rotate-y-180' : 'hidden'} ${cardBackgroundClass}`}>
           <div className="transform rotate-y-180">
             <h3 className={`text-xl font-bold mb-4 ${
               theme === 'dark' ? 'text-white' : 'text-light-text'
