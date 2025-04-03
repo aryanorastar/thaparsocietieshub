@@ -20,7 +20,7 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
             href={society.registrationLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center px-4 py-2 w-full justify-center bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg hover:from-emerald-700 hover:to-teal-700 transition-all duration-300 transform hover:scale-[1.02] relative overflow-hidden button-effect"
+            className="group inline-flex items-center px-4 py-2 w-full justify-center bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-all duration-300 transform hover:scale-[1.02] relative overflow-hidden button-effect"
             onClick={(e) => e.stopPropagation()}
           >
             <span className="relative z-10 flex items-center">
@@ -34,7 +34,7 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
         return (
           <button
             disabled
-            className="group inline-flex items-center px-4 py-2 w-full justify-center bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-lg cursor-not-allowed relative overflow-hidden opacity-90"
+            className="group inline-flex items-center px-4 py-2 w-full justify-center bg-amber-500 text-white rounded-lg cursor-not-allowed relative overflow-hidden opacity-90"
           >
             <span className="relative z-10 flex items-center">
               <Clock size={16} className="mr-2 animate-pulse" />
@@ -46,7 +46,7 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
         return (
           <button
             disabled
-            className="group inline-flex items-center px-4 py-2 w-full justify-center bg-gradient-to-r from-gray-600 to-gray-700 text-white rounded-lg cursor-not-allowed relative overflow-hidden opacity-80"
+            className="group inline-flex items-center px-4 py-2 w-full justify-center bg-gray-600 text-white rounded-lg cursor-not-allowed relative overflow-hidden opacity-80"
           >
             <span className="relative z-10 flex items-center">
               <Lock size={16} className="mr-2" />
@@ -59,13 +59,13 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
 
   return (
     <div className={`hover-card-effect transition-all duration-300 ${
-      theme === 'dark' ? 'glass-effect' : 'bg-white shadow-lg'
-    } rounded-xl overflow-hidden gradient-border p-6`}>
+      theme === 'dark' ? 'bg-gray-800' : 'bg-white shadow-lg'
+    } rounded-xl overflow-hidden border ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'} p-6`}>
       {!showDetails ? (
         // Main card content
         <>
           <div className="flex items-center space-x-4 mb-4">
-            <div className="w-16 h-16 rounded-full overflow-hidden bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center">
+            <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
               {society.logo_url && !imageError ? (
                 <img
                   src={society.logo_url}
@@ -74,14 +74,14 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
                   onError={() => setImageError(true)}
                 />
               ) : (
-                <ImageIcon className="w-8 h-8 text-indigo-400" />
+                <ImageIcon className="w-8 h-8 text-gray-400" />
               )}
             </div>
             <div className="flex-1">
-              <h3 className={`text-xl font-bold ${theme === 'dark' ? 'text-gradient' : 'text-light-text'}`}>
+              <h3 className={`text-xl font-bold ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
                 {society.name}
               </h3>
-              <span className="px-3 py-1 text-sm rounded-full bg-gradient-to-r from-indigo-500/10 to-purple-500/10 text-indigo-600 font-medium border border-indigo-200/20">
+              <span className="px-3 py-1 text-sm rounded-full bg-indigo-100 text-indigo-600 font-medium">
                 {society.category}
               </span>
             </div>
@@ -97,7 +97,7 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
             <div className={`flex items-center mb-4 ${
               theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
             }`}>
-              <UserCircle className="h-4 w-4 mr-2 text-brand-red" />
+              <UserCircle className="h-4 w-4 mr-2 text-indigo-600" />
               <span className="transition-colors duration-300">
                 Faculty Head: {society.faculty_head}
               </span>
@@ -108,7 +108,7 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
             <div className={`flex items-center mb-4 ${
               theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
             }`}>
-              <MapPin className="h-4 w-4 mr-2 text-brand-red" />
+              <MapPin className="h-4 w-4 mr-2 text-indigo-600" />
               <span className="transition-colors duration-300">{society.room}</span>
             </div>
           )}
@@ -117,10 +117,10 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
             <div className={`flex items-center mb-4 ${
               theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
             }`}>
-              <Mail className="h-4 w-4 mr-2 text-brand-red" />
+              <Mail className="h-4 w-4 mr-2 text-indigo-600" />
               <a 
                 href={`mailto:${society.email}`} 
-                className="hover:text-brand-red transition-colors duration-300"
+                className="hover:text-indigo-600 transition-colors duration-300"
                 onClick={(e) => e.stopPropagation()}
               >
                 {society.email}
@@ -132,10 +132,10 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
             <div className={`flex items-center mb-4 ${
               theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
             }`}>
-              <Phone className="h-4 w-4 mr-2 text-brand-red" />
+              <Phone className="h-4 w-4 mr-2 text-indigo-600" />
               <a 
                 href={`tel:${society.phone_number}`} 
-                className="hover:text-brand-red transition-colors duration-300"
+                className="hover:text-indigo-600 transition-colors duration-300"
                 onClick={(e) => e.stopPropagation()}
               >
                 {society.phone_number}
@@ -195,7 +195,7 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
             
             <button
               onClick={() => setShowDetails(true)}
-              className="group inline-flex items-center px-4 py-2 w-full justify-center bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg hover:from-indigo-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-[1.02] relative overflow-hidden button-effect mt-2"
+              className="group inline-flex items-center px-4 py-2 w-full justify-center bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all duration-300 transform hover:scale-[1.02] relative overflow-hidden button-effect mt-2"
             >
               <span className="relative z-10 flex items-center">
                 <Info size={16} className="mr-2" />
@@ -209,7 +209,7 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
         // Details view
         <>
           <h3 className={`text-xl font-bold mb-4 ${
-            theme === 'dark' ? 'text-white' : 'text-light-text'
+            theme === 'dark' ? 'text-white' : 'text-gray-800'
           }`}>About {society.name}</h3>
           
           <p className={`mb-4 ${
@@ -221,7 +221,7 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
               <div className={`flex items-center ${
                 theme === 'dark' ? 'text-gray-200' : 'text-gray-600'
               }`}>
-                <UserCircle className="h-4 w-4 mr-2 text-brand-red" />
+                <UserCircle className="h-4 w-4 mr-2 text-indigo-600" />
                 <span>Faculty Head: {society.faculty_head}</span>
               </div>
             )}
@@ -229,7 +229,7 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
               <div className={`flex items-center ${
                 theme === 'dark' ? 'text-gray-200' : 'text-gray-600'
               }`}>
-                <MapPin className="h-4 w-4 mr-2 text-brand-red" />
+                <MapPin className="h-4 w-4 mr-2 text-indigo-600" />
                 <span>Location: {society.room}</span>
               </div>
             )}
@@ -237,10 +237,10 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
               <div className={`flex items-center ${
                 theme === 'dark' ? 'text-gray-200' : 'text-gray-600'
               }`}>
-                <Mail className="h-4 w-4 mr-2 text-brand-red" />
+                <Mail className="h-4 w-4 mr-2 text-indigo-600" />
                 <a 
                   href={`mailto:${society.email}`} 
-                  className="hover:text-brand-red"
+                  className="hover:text-indigo-600"
                   onClick={(e) => e.stopPropagation()}
                 >
                   {society.email}
@@ -251,10 +251,10 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
               <div className={`flex items-center ${
                 theme === 'dark' ? 'text-gray-200' : 'text-gray-600'
               }`}>
-                <Phone className="h-4 w-4 mr-2 text-brand-red" />
+                <Phone className="h-4 w-4 mr-2 text-indigo-600" />
                 <a 
                   href={`tel:${society.phone_number}`} 
-                  className="hover:text-brand-red"
+                  className="hover:text-indigo-600"
                   onClick={(e) => e.stopPropagation()}
                 >
                   {society.phone_number}
@@ -264,7 +264,7 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
             <div className={`flex items-center ${
               theme === 'dark' ? 'text-gray-200' : 'text-gray-600'
             }`}>
-              <Clock className="h-4 w-4 mr-2 text-brand-red" />
+              <Clock className="h-4 w-4 mr-2 text-indigo-600" />
               <span>Status: {society.registrationStatus}</span>
             </div>
           </div>
@@ -321,7 +321,7 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
             
             <button
               onClick={() => setShowDetails(false)}
-              className="group inline-flex items-center px-4 py-2 w-full justify-center bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg hover:from-indigo-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-[1.02] relative overflow-hidden button-effect mt-2"
+              className="group inline-flex items-center px-4 py-2 w-full justify-center bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all duration-300 transform hover:scale-[1.02] relative overflow-hidden button-effect mt-2"
             >
               <span className="relative z-10 flex items-center">
                 <ArrowRight size={16} className="mr-2 transform rotate-180" />
