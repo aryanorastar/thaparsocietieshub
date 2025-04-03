@@ -2,6 +2,121 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Font Imports */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* Base Font Settings */
+:root {
+  --font-primary: 'Outfit', sans-serif;
+  --font-secondary: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+body {
+  font-family: var(--font-primary);
+  @apply text-base leading-relaxed;
+}
+
+/* Typography Styles */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-secondary);
+  @apply font-bold leading-tight;
+}
+
+h1 {
+  @apply text-4xl md:text-5xl lg:text-6xl tracking-tight;
+}
+
+h2 {
+  @apply text-3xl md:text-4xl tracking-tight;
+}
+
+h3 {
+  @apply text-2xl md:text-3xl;
+}
+
+.display-text {
+  font-family: var(--font-secondary);
+  @apply text-5xl md:text-7xl font-bold tracking-tighter;
+}
+
+.subtitle {
+  font-family: var(--font-primary);
+  @apply text-lg md:text-xl font-light tracking-wide;
+}
+
+code, pre {
+  font-family: var(--font-mono);
+  @apply text-sm;
+}
+
+/* Text Effects */
+.text-glow {
+  text-shadow: 0 0 8px rgba(215, 38, 56, 0.7);
+}
+
+.text-outline {
+  -webkit-text-stroke: 1px currentColor;
+  color: transparent;
+}
+
+.text-shadow-subtle {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Animated typography */
+@keyframes text-reveal {
+  0% { clip-path: inset(0 100% 0 0); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+
+.text-reveal {
+  display: inline-block;
+  animation: text-reveal 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  animation-delay: calc(var(--reveal-delay, 0) * 100ms);
+}
+
+.text-animated-underline {
+  position: relative;
+}
+
+.text-animated-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, #D72638, #F4A261);
+  transition: width 0.3s ease;
+}
+
+.text-animated-underline:hover::after {
+  width: 100%;
+}
+
+/* This combines with your existing text-gradient class */
+.fancy-heading {
+  @apply text-gradient font-bold tracking-tight;
+  font-family: var(--font-secondary);
+  letter-spacing: -0.025em;
+}
+
+/* Utility Classes */
+.font-primary {
+  font-family: var(--font-primary);
+}
+
+.font-secondary {
+  font-family: var(--font-secondary);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
 /* Animations */
 @keyframes float {
   0% { transform: translateY(0px) rotate(0deg); }
