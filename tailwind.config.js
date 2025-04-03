@@ -5,8 +5,9 @@ export default {
   theme: {
     extend: {
      fontFamily: {
-        sans: ['Poppins', 'sans-serif'],
-        serif: ['Merriweather', 'serif'],
+       outfit: ["Outfit", "sans-serif"],
+        space: ["Space Grotesk", "sans-serif"],
+        jetbrains: ["JetBrains Mono", "monospace"],
      },
       fontSize: {
         'xs': ['0.75rem', { lineHeight: '1rem' }],
