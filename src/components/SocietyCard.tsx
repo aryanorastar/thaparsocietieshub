@@ -60,9 +60,8 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
 
   return (
     <div 
-      className="hover-card-effect cursor-pointer perspective-1000 transition-transform duration-700"
-      onMouseEnter={() => setIsFlipped(true)}
-      onMouseLeave={() => setIsFlipped(false)}
+      className={`hover-card-effect cursor-pointer perspective-1000 transition-transform duration-700 ${isFlipped ? 'rotate-y-180' : ''}`}
+      onClick={() => setIsFlipped(!isFlipped)}
     >
       <div className="relative w-full h-full">
         <div className={`rounded-xl overflow-hidden gradient-border p-6 ${isFlipped ? 'hidden' : 'block'} ${cardBackgroundClass}`}>
