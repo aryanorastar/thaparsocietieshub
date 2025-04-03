@@ -287,63 +287,72 @@ function App() {
                     </div>
                   </div>
 
-                  {/* Multi-filter section */}
-                  <div className={`p-4 rounded-lg ${
-                    theme === 'dark'
-                      ? 'glass-effect-dark border border-brand-grey/30'
-                      : 'bg-light-card/80 border border-light-border'
-                    }`}>
-                    <h3 className={`text-lg font-medium mb-3 flex items-center ${theme === 'dark' ? 'text-white' : 'text-light-text'}`}>
-                      <Filter className="h-5 w-5 mr-2 text-brand-gold" />
-                      Filters
-                    </h3>
-                    
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {/* Registration Status Filter */}
-                      <div>
-                        <label className={`block mb-2 text-sm font-medium ${theme === 'dark' ? 'text-white/80' : 'text-light-text/80'}`}>
-                          Registration Status
-                        </label>
-                        <select
-                          value={registrationFilter}
-                          onChange={(e) => setRegistrationFilter(e.target.value)}
-                          className={`backdrop-blur-sm border-0 rounded-lg px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-brand-red ${
-                            theme === 'dark'
-                              ? 'bg-brand-black/90 text-white'
-                              : 'bg-light-card text-light-text'
-                          }`}
-                        >
-                          <option value="all">All Registrations</option>
-                          <option value="open">Open</option>
-                          <option value="coming-soon">Coming Soon</option>
-                          <option value="closed">Closed</option>
-                        </select>
-                      </div>
+                  {/* Multi-filter section with glow effect */}
+                  <div className="relative group">
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-teal via-brand-gold to-brand-red rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                    <div className={`relative p-4 rounded-lg ${
+                      theme === 'dark'
+                        ? 'glass-effect-dark border border-brand-grey/30'
+                        : 'bg-light-card/80 border border-light-border'
+                      }`}>
+                      <h3 className={`text-lg font-medium mb-3 flex items-center ${theme === 'dark' ? 'text-white' : 'text-light-text'}`}>
+                        <Filter className="h-5 w-5 mr-2 text-brand-gold" />
+                        Filters
+                      </h3>
+                      
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {/* Registration Status Filter */}
+                        <div className="relative group">
+                          <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-red to-brand-gold rounded-lg blur opacity-30 group-hover:opacity-70 transition duration-300"></div>
+                          <div className="relative">
+                            <label className={`block mb-2 text-sm font-medium ${theme === 'dark' ? 'text-white/80' : 'text-light-text/80'}`}>
+                              Registration Status
+                            </label>
+                            <select
+                              value={registrationFilter}
+                              onChange={(e) => setRegistrationFilter(e.target.value)}
+                              className={`backdrop-blur-sm border-0 rounded-lg px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-brand-red ${
+                                theme === 'dark'
+                                  ? 'bg-brand-black/90 text-white'
+                                  : 'bg-light-card text-light-text'
+                              }`}
+                            >
+                              <option value="all">All Registrations</option>
+                              <option value="open">Open</option>
+                              <option value="coming-soon">Coming Soon</option>
+                              <option value="closed">Closed</option>
+                            </select>
+                          </div>
+                        </div>
 
-                      {/* Society Category Filter */}
-                      <div>
-                        <label className={`block mb-2 text-sm font-medium ${theme === 'dark' ? 'text-white/80' : 'text-light-text/80'}`}>
-                          Society Type
-                        </label>
-                        <select
-                          value={selectedCategory}
-                          onChange={(e) => setSelectedCategory(e.target.value)}
-                          className={`backdrop-blur-sm border-0 rounded-lg px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-brand-red ${
-                            theme === 'dark'
-                              ? 'bg-brand-black/90 text-white'
-                              : 'bg-light-card text-light-text'
-                          }`}
-                        >
-                          <option value="all">All Categories</option>
-                          {categories
-                            .filter(category => category !== 'all')
-                            .sort()
-                            .map((category) => (
-                              <option key={category} value={category}>
-                                {category.charAt(0).toUpperCase() + category.slice(1)}
-                              </option>
-                            ))}
-                        </select>
+                        {/* Society Category Filter */}
+                        <div className="relative group">
+                          <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-gold to-brand-teal rounded-lg blur opacity-30 group-hover:opacity-70 transition duration-300"></div>
+                          <div className="relative">
+                            <label className={`block mb-2 text-sm font-medium ${theme === 'dark' ? 'text-white/80' : 'text-light-text/80'}`}>
+                              Society Type
+                            </label>
+                            <select
+                              value={selectedCategory}
+                              onChange={(e) => setSelectedCategory(e.target.value)}
+                              className={`backdrop-blur-sm border-0 rounded-lg px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-brand-red ${
+                                theme === 'dark'
+                                  ? 'bg-brand-black/90 text-white'
+                                  : 'bg-light-card text-light-text'
+                              }`}
+                            >
+                              <option value="all">All Categories</option>
+                              {categories
+                                .filter(category => category !== 'all')
+                                .sort()
+                                .map((category) => (
+                                  <option key={category} value={category}>
+                                    {category.charAt(0).toUpperCase() + category.slice(1)}
+                                  </option>
+                                ))}
+                            </select>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -389,22 +398,25 @@ function App() {
                   const matchesRegistration = registrationFilter === 'all' || society.registrationStatus === registrationFilter;
                   return matchesSearch && matchesCategory && matchesRegistration;
                 }).length === 0 && (
-                  <div className={`text-center py-12 rounded-lg mb-12 ${
-                    theme === 'dark'
-                      ? 'glass-effect-dark'
-                      : 'bg-light-card'
-                  }`}>
-                    <p className="text-brand-gold text-lg">No societies found matching your search criteria.</p>
-                    <button 
-                      onClick={() => {
-                        setSearchTerm('');
-                        setSelectedCategory('all');
-                        setRegistrationFilter('all');
-                      }}
-                      className="mt-4 px-4 py-2 bg-brand-red text-white rounded-lg hover:bg-brand-red/80 transition"
-                    >
-                      Reset Filters
-                    </button>
+                  <div className="relative group mb-12">
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-red to-brand-teal rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                    <div className={`relative text-center py-12 rounded-lg ${
+                      theme === 'dark'
+                        ? 'glass-effect-dark'
+                        : 'bg-light-card'
+                    }`}>
+                      <p className="text-brand-gold text-lg">No societies found matching your search criteria.</p>
+                      <button 
+                        onClick={() => {
+                          setSearchTerm('');
+                          setSelectedCategory('all');
+                          setRegistrationFilter('all');
+                        }}
+                        className="mt-4 px-6 py-2 bg-brand-red text-white rounded-lg hover:bg-brand-red/80 transition transform hover:scale-105"
+                      >
+                        Reset Filters
+                      </button>
+                    </div>
                   </div>
                 )}
               </>
