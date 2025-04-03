@@ -341,11 +341,6 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
           </div>
 
           {getRegistrationButton()}
-          
-          <div className="absolute bottom-2 right-2 text-gray-400 animate-bounce">
-            <ArrowRight size={16} className="transform rotate-180" />
-            <span className="text-xs font-medium">Tap to flip back</span>
-          </div>
         </div>
       </div>
     </div>
