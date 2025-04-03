@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Send } from 'lucide-react';
+import { Send, Mail } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { supabase } from '../lib/supabase';
 
 export function ContactForm() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [mailLink, setMailLink] = useState(null); // Store mailto link
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,10 +28,12 @@ export function ContactForm() {
 
     toast.success('Message sent successfully!');
 
-    // Redirect to Gmail
-    window.location.href = `mailto:your-email@gmail.com?subject=Contact Form&body=${encodeURIComponent(
-      `Name: ${name}%0AEmail: ${email}%0A%0A${message}`
+    // Generate Gmail "mailto" link
+    const mailtoLink = `mailto:your-email@gmail.com?subject=New Contact Form Submission&body=${encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\n\n${message}`
     )}`;
+
+    setMailLink(mailtoLink); // Store link for manual click
 
     // Reset form
     setFormData({ name: '', email: '', message: '' });
@@ -78,6 +81,17 @@ export function ContactForm() {
           <Send size={16} />
         </button>
       </form>
+
+      {/* Gmail Redirect Button */}
+      {mailLink && (
+        <a
+          href={mailLink}
+          className="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-all duration-300 flex items-center justify-center space-x-2"
+        >
+          <Mail size={16} />
+          <span>Open in Gmail</span>
+        </a>
+      )}
     </div>
   );
 }
