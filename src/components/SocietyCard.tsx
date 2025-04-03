@@ -190,7 +190,7 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
         </div>
 
         {/* Back of card */}
-        <div className={`rounded-xl overflow-hidden  p-6 absolute top-0 w-full h-full ${isFlipped ? 'block rotate-y-180' : 'hidden'} ${
+        <div className={`rounded-xl overflow-hidden white-border p-6 absolute top-0 w-full h-full ${isFlipped ? 'block rotate-y-180' : 'hidden'} ${
           theme === 'dark'
             ? 'glass-effect-dark'
             : 'bg-light-card'
