@@ -71,8 +71,8 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
       className="flip-card group transition-all duration-500"
       style={{ 
         perspective: "1000px", 
-        height: "450px",
-        transformStyle: "preserve-3d"
+        height: "auto",
+        minHeight: "450px",
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -81,13 +81,22 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
         className={`flip-card-inner w-full h-full relative transition-transform duration-700 shadow-md ${isHovered ? 'shadow-lg' : ''}`}
         style={{ 
           transformStyle: "preserve-3d", 
-          transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)" 
+          transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
+          position: "relative"
         }}
       >
         {/* Front of card */}
         <div 
-          className={`flip-card-front absolute w-full h-full ${bgColor} rounded-xl overflow-hidden border ${borderColor} shadow-sm hover:shadow-md transition-shadow duration-300`}
-          style={{ backfaceVisibility: "hidden" }}
+          className={`flip-card-front w-full h-full ${bgColor} rounded-xl border ${borderColor} shadow-sm hover:shadow-md transition-shadow duration-300`}
+          style={{ 
+            backfaceVisibility: "hidden",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            overflow: "auto"
+          }}
           onClick={() => setIsFlipped(true)}
           role="button"
           tabIndex={0}
@@ -256,10 +265,16 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
 
         {/* Back of card */}
         <div 
-          className={`flip-card-back absolute w-full h-full ${bgColor} rounded-xl overflow-hidden border ${borderColor} p-6 shadow-md`}
+          className={`flip-card-back w-full h-full ${bgColor} rounded-xl border ${borderColor} shadow-md`}
           style={{ 
             backfaceVisibility: "hidden",
-            transform: "rotateY(180deg)"
+            transform: "rotateY(180deg)",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            overflow: "auto"
           }}
           onClick={() => setIsFlipped(false)}
           role="button"
@@ -274,7 +289,7 @@ export function SocietyCard({ society, theme }: SocietyCardProps) {
           {/* Add a subtle gradient overlay at the top */}
           <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-indigo-600/10 to-transparent z-0"></div>
           
-          <div className="relative z-10">
+          <div className="relative z-10 p-6">
             <div className="flex items-center mb-4">
               <button 
                 onClick={(e) => {
