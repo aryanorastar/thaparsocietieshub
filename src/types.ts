@@ -49,3 +49,14 @@ export interface TimelineEvent {
   order: number;
   created_at: string;
 }
+
+export interface NewsItem {
+  id: string;
+  title: string;
+  content: string;
+  image_url?: string;
+  category: string;
+  published_at: string;
+  created_at: string;
+  featured: boolean;
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, Info, Users, LinkIcon, MessageSquare } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { NewsSection } from '../components/NewsSection';
 
 export function Home() {
   return (
@@ -30,6 +31,9 @@ export function Home() {
           </Link>
         </div>
       </section>
+
+      {/* News Section */}
+      <NewsSection />
 
       {/* Features Section */}
       <section className="grid md:grid-cols-3 gap-8">
