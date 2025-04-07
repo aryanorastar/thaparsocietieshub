@@ -7,6 +7,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
 
+.license-info {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  margin-left: auto;
+  padding-left: 15px;
+}
+
+.license-info a {
+  text-decoration: underline;
+  color: inherit;
+}
+
+@media (max-width: 768px) {
+  .license-info {
+    display: none; /* Hide on mobile if space is limited */
+  }
+}
+
 /* Base Font Settings */
 :root {
   --font-primary: 'Outfit', sans-serif;
