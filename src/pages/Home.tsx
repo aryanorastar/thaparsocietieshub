@@ -5,7 +5,7 @@ import { NewsSection } from '../components/NewsSection';
 
 export function Home() {
   return (
-    <div className="space-y-20">
+    <div className="space-y-16">
       {/* Hero Section */}
       <section className="text-center py-20">
         <h1 className="text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-brand-red to-brand-teal">
@@ -32,8 +32,22 @@ export function Home() {
         </div>
       </section>
 
-      {/* News Section */}
-      <NewsSection />
+      {/* News Section with compact mode */}
+      <section>
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-brand-red to-brand-teal">
+            Latest Updates
+          </h2>
+          <Link
+            to="/news"
+            className="text-brand-red hover:text-brand-red/80 flex items-center"
+          >
+            View All News
+            <ArrowRight className="ml-2 w-4 h-4" />
+          </Link>
+        </div>
+        <NewsSection compact />
+      </section>
 
       {/* Features Section */}
       <section className="grid md:grid-cols-3 gap-8">

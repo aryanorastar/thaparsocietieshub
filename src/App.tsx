@@ -9,6 +9,7 @@ import { ThemeToggle } from './components/ThemeToggle';
 import { Home } from './pages/Home';
 import { About } from './pages/About';
 import { Timeline } from './pages/Timeline';
+import { News } from './pages/News';
 import { supabase } from './lib/supabase';
 import { Society } from './types';
 import { Theme, getTheme, setTheme } from './lib/theme';
@@ -265,6 +266,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/timeline" element={<Timeline />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/news/:id" element={<News />} />
             <Route path="/societies" element={
               <>
                 {/* Search and Filter Section */}
