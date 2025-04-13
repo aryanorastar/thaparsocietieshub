@@ -1,1 +1,1 @@
-# thaparsocietieshub
+# Thapar Societies Hub
