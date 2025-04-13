@@ -28,12 +28,18 @@ This project is built with:
 - 🧩 [shadcn/ui](https://ui.shadcn.com/) – Beautiful and accessible UI components
 - 🛢️ [Supabase](https://supabase.com/) – Backend-as-a-service for authentication and database
 
+---
+
 ## 🤝 Contributing
 If you'd like to contribute or suggest a feature, feel free to open an issue or pull request. All contributions are welcome!
+
+---
 
 ## 📬 Contact
 Made by Aryan Gupta for the students of Thapar.
 Reach out at aryangupts05@gmail.com or connect via LinkedIn.
+
+---
 
 Made with ❤️ for Thapar University
 
