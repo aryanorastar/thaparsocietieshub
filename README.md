@@ -42,4 +42,5 @@ Reach out at aryangupts05@gmail.com or connect via LinkedIn.
 ---
 
 Let me know if you'd like this as a downloadable `.md` file or want to add your actual GitHub repo link, LinkedIn, or email.
+
 Made with ❤️ for Thapar University
